@@ -16,7 +16,8 @@
     }
   },
   "remoteUser": "frappe",
-  "overrideCommand": false,
+  "postCreateCommand": "bash /workspace/.devcontainer/setup.sh",
+  "postStartCommand": "bash /workspace/.devcontainer/start.sh",
   "shutdownAction": "stopCompose",
   "hostRequirements": {
     "cpus": 4,

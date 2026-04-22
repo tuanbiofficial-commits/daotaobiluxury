@@ -6,12 +6,11 @@ export PATH="${NVM_DIR}/versions/node/v${NODE_VERSION_DEVELOP}/bin/:${PATH}"
 cd /home/frappe
 
 if [ -d "/home/frappe/frappe-bench/apps/frappe" ]; then
-    echo "==> Bench already exists, starting server..."
-    cd frappe-bench
-    exec bench start
+    echo "==> Bench already exists, skipping setup."
+    exit 0
 fi
 
-echo "==> First-time setup: initializing bench (this takes ~5-10 minutes)..."
+echo "==> First-time setup — this takes 5-10 minutes..."
 
 bench init --skip-redis-config-generation frappe-bench
 
@@ -28,15 +27,20 @@ sed -i '/watch/d' ./Procfile
 echo "==> Installing payments app..."
 bench get-app payments
 
-echo "==> Installing LMS app from mounted workspace (your fork)..."
-bench get-app /workspace
+echo "==> Linking LMS app from mounted fork..."
+rm -rf apps/lms
+ln -sfn /workspace apps/lms
+./env/bin/pip install -e apps/lms
+if ! grep -qx "lms" sites/apps.txt 2>/dev/null; then
+    echo "lms" >> sites/apps.txt
+fi
 
 echo "==> Creating site lms.localhost..."
 bench new-site lms.localhost \
-  --force \
-  --mariadb-root-password 123 \
-  --admin-password admin \
-  --no-mariadb-socket
+    --force \
+    --mariadb-root-password 123 \
+    --admin-password admin \
+    --no-mariadb-socket
 
 bench --site lms.localhost install-app payments
 bench --site lms.localhost install-app lms
@@ -47,9 +51,7 @@ bench use lms.localhost
 
 echo ""
 echo "===================================================="
-echo "  Setup done! Login: Administrator / admin"
-echo "  URL: http://localhost:8000"
+echo "  Setup done! Restart the codespace or run:"
+echo "  bash /workspace/.devcontainer/start.sh"
+echo "  Login: Administrator / admin"
 echo "===================================================="
-echo ""
-
-exec bench start
