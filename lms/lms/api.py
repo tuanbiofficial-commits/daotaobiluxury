@@ -1749,13 +1749,13 @@ def get_progress_distribution(progressList: list):
 
 @frappe.whitelist(allow_guest=True)
 def get_pwa_manifest():
-	title = frappe.db.get_single_value("Website Settings", "app_name") or "Frappe Learning"
+	title = frappe.db.get_single_value("Website Settings", "app_name") or "BILUXURY Academy"
 	banner_image = frappe.db.get_single_value("Website Settings", "banner_image")
 
 	manifest = {
 		"name": title,
 		"short_name": title,
-		"description": "Easy to use, 100% open source Learning Management System",
+		"description": "Hệ Thống Đào Tạo Nội Bộ BILUXURY",
 		"start_url": get_lms_route(),
 		"icons": [
 			{

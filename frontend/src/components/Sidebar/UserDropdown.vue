@@ -34,7 +34,10 @@
 							>
 								{{ branding.data?.app_name }}
 							</span>
-							<span v-else> Learning </span>
+							<span v-else> BILUXURY Academy </span>
+								<div class="text-xs text-ink-gray-6 leading-tight mt-0.5">
+									Hệ Thống Đào Tạo Nội Bộ
+								</div>
 						</div>
 						<div
 							v-if="userResource.data"
