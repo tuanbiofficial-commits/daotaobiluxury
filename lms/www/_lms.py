@@ -19,7 +19,7 @@ def get_context():
 	frappe.db.commit()
 
 	app_path = frappe.form_dict.get("app_path")
-	favicon = frappe.db.get_single_value("Website Settings", "favicon") or "/assets/lms/frontend/favicon.png"
+	favicon = frappe.db.get_single_value("Website Settings", "favicon") or "/assets/lms/frontend/learning.svg"
 	title = frappe.db.get_single_value("Website Settings", "app_name") or "BILUXURY Academy"
 
 	context.meta = get_meta(app_path, title, favicon)
