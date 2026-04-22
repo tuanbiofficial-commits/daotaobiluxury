@@ -40,13 +40,6 @@
 					/>
 				</div>
 				<div class="space-y-4">
-					<FormControl
-						v-model="course.short_introduction"
-						:label="__('Short Introduction')"
-						type="textarea"
-						:required="true"
-						:rows="4"
-					/>
 					<div class="">
 						<div class="mb-1.5 text-sm text-ink-gray-5">
 							{{ __('Course Description') }}
@@ -142,6 +135,11 @@ const validateFields = () => {
 
 const saveCourse = (close: () => void = () => {}) => {
 	validateFields()
+	// Short Introduction removed from UI — derive from description so backend still gets a value.
+	if (!course.value.short_introduction && course.value.description) {
+		const plain = course.value.description.replace(/<[^>]+>/g, '').trim()
+		course.value.short_introduction = plain.slice(0, 140)
+	}
 	props.courses.insert.submit(
 		{
 			...course.value,
