@@ -22,17 +22,6 @@
 						:inlineCreate="true"
 						:onCreate="createCategory"
 					/>
-					<MultiSelect
-						v-model="course.instructors"
-						doctype="User"
-						:label="__('Instructors')"
-						url="lms.lms.api.search_users_by_role"
-						:searchParams="{
-							roles: JSON.stringify(['Course Creator', 'Batch Evaluator']),
-						}"
-						:onCreate="() => (showMemberModal = true)"
-						:required="true"
-					/>
 					<Uploader
 						v-model="course.image"
 						:label="__('Course Image')"
@@ -40,6 +29,13 @@
 					/>
 				</div>
 				<div class="space-y-4">
+					<FormControl
+						v-model="course.short_introduction"
+						:label="__('Short Introduction')"
+						type="textarea"
+						:required="true"
+						:rows="4"
+					/>
 					<div class="">
 						<div class="mb-1.5 text-sm text-ink-gray-5">
 							{{ __('Course Description') }}
@@ -135,10 +131,9 @@ const validateFields = () => {
 
 const saveCourse = (close: () => void = () => {}) => {
 	validateFields()
-	// Short Introduction removed from UI — derive from description so backend still gets a value.
-	if (!course.value.short_introduction && course.value.description) {
-		const plain = course.value.description.replace(/<[^>]+>/g, '').trim()
-		course.value.short_introduction = plain.slice(0, 140)
+	// Instructors field removed from UI — default to current user so backend still gets one.
+	if (!course.value.instructors.length && user.data?.name) {
+		course.value.instructors = [user.data.name]
 	}
 	props.courses.insert.submit(
 		{
