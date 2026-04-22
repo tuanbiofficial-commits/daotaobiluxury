@@ -51,6 +51,17 @@ bench --site lms.localhost set-config allow_tests 1
 bench --site lms.localhost clear-cache
 bench use lms.localhost
 
+echo "==> Setting up /sites compatibility symlink for Vue frontend build..."
+# The socket.js in frontend uses ../../../../sites/common_site_config.json which
+# resolves to /sites when apps/lms is a symlink to /workspace — create that path.
+sudo ln -sfn /home/frappe/frappe-bench/sites /sites || true
+
+echo "==> Building Vue frontend (yarn install + build, ~3-5 min)..."
+cd /workspace/frontend
+yarn install
+yarn build
+cd /home/frappe/frappe-bench
+
 echo ""
 echo "===================================================="
 echo "  Setup done! Restart the codespace or run:"
