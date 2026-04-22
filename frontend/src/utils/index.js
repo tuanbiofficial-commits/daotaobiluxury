@@ -475,9 +475,8 @@ const getSidebarItems = (forMobile = false) => {
 					to: 'Programs',
 					activeFor: ['Programs', 'ProgramDetail'],
 					await: true,
-					condition: () => {
-						return checkIfCanAddProgram(forMobile)
-					},
+					// BILUXURY: hidden — internal training has no hierarchical programs.
+					condition: () => false,
 				},
 				{
 					label: 'Batches',
@@ -499,6 +498,8 @@ const getSidebarItems = (forMobile = false) => {
 					icon: 'Briefcase',
 					to: 'Jobs',
 					activeFor: ['Jobs', 'JobDetail'],
+					// BILUXURY: hidden — not a job board, this is internal training.
+					condition: () => false,
 				},
 				{
 					label: 'Statistics',
@@ -559,9 +560,8 @@ const getSidebarItems = (forMobile = false) => {
 					label: 'Programming Exercises',
 					icon: 'Code',
 					to: 'ProgrammingExercises',
-					condition: () => {
-						return !forMobile && isAdmin()
-					},
+					// BILUXURY: hidden — retail training doesn't need coding exercises.
+					condition: () => false,
 					activeFor: [
 						'ProgrammingExercises',
 						'ProgrammingExerciseSubmissions',

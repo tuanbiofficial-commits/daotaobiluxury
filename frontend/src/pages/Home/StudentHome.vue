@@ -1,10 +1,68 @@
 <template>
 	<div>
-		<div class="mt-10 space-y-10">
+		<!-- BILUXURY welcome banner -->
+		<div
+			class="relative overflow-hidden rounded-xl px-6 py-6 md:px-8 md:py-7 mt-6"
+			style="background: linear-gradient(135deg, #1A1F2E 0%, #2A2F3E 100%)"
+		>
+			<div class="flex items-center gap-5 relative z-10">
+				<div class="flex-shrink-0 hidden sm:block">
+					<div
+						class="w-16 h-16 rounded-full border-2 flex items-center justify-center"
+						style="border-color: #C9A961"
+					>
+						<span
+							class="text-3xl font-serif"
+							style="color: #C9A961"
+						>B</span>
+					</div>
+				</div>
+				<div class="flex-1 min-w-0">
+					<h1 class="text-xl md:text-2xl font-semibold text-white leading-tight">
+						{{ __('Chào') }}
+						<span style="color: #C9A961">
+							{{ user.data?.first_name || user.data?.full_name || user.data?.email }}
+						</span>
+						👋
+					</h1>
+					<p class="text-white/70 mt-1.5 text-sm md:text-base">
+						{{ __('Chào mừng đến với BILUXURY Academy — Hệ Thống Đào Tạo Nội Bộ') }}
+					</p>
+				</div>
+			</div>
+			<!-- Decorative gold accent -->
+			<div
+				class="absolute -right-12 -bottom-12 w-48 h-48 rounded-full opacity-10"
+				style="background: #C9A961"
+			></div>
+		</div>
+
+		<!-- Internal announcements (simple static card for now) -->
+		<div
+			v-if="announcements.length"
+			class="mt-8 rounded-lg border p-4 bg-surface-gray-1"
+		>
+			<div class="flex items-center gap-2 mb-2">
+				<Megaphone class="w-5 h-5" style="color: #C9A961" />
+				<span class="font-semibold text-ink-gray-9">
+					{{ __('Thông báo nội bộ') }}
+				</span>
+			</div>
+			<ul class="space-y-1.5 text-sm text-ink-gray-7">
+				<li v-for="(item, i) in announcements" :key="i" class="flex gap-2">
+					<span style="color: #C9A961">•</span>
+					<span>{{ item }}</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mt-8 space-y-10">
 			<UpcomingEvaluations :forHome="true" />
+
+			<!-- Live classes -->
 			<div v-if="myLiveClasses.data?.length">
 				<div class="font-semibold text-lg mb-3 text-ink-gray-9">
-					{{ __('Upcoming Live Classes') }}
+					{{ __('Lớp học trực tiếp sắp tới') }}
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-4 gap-5">
 					<div
@@ -20,9 +78,7 @@
 						<div class="mt-auto space-y-4 text-ink-gray-7">
 							<div class="flex items-center gap-x-2">
 								<Calendar class="w-4 h-4 stroke-1.5" />
-								<span>
-									{{ dayjs(cls.date).format('DD MMMM YYYY') }}
-								</span>
+								<span>{{ dayjs(cls.date).format('DD MMMM YYYY') }}</span>
 							</div>
 							<div class="flex items-center gap-x-2">
 								<Clock class="w-4 h-4 stroke-1.5" />
@@ -43,7 +99,7 @@
 									:class="cls.join_url ? 'w-full' : 'w-1/2'"
 								>
 									<Monitor class="h-4 w-4 stroke-1.5" />
-									{{ __('Start') }}
+									{{ __('Bắt đầu') }}
 								</a>
 								<a
 									:href="cls.join_url"
@@ -51,19 +107,17 @@
 									class="w-full cursor-pointer inline-flex items-center justify-center gap-2 transition-colors focus:outline-none text-ink-gray-8 bg-surface-gray-2 hover:bg-surface-gray-3 active:bg-surface-gray-4 focus-visible:ring focus-visible:ring-outline-gray-3 h-7 text-base px-2 rounded"
 								>
 									<Video class="h-4 w-4 stroke-1.5" />
-									{{ __('Join') }}
+									{{ __('Tham gia') }}
 								</a>
 							</div>
 							<Tooltip
 								v-else-if="hasClassEnded(cls)"
-								:text="__('This class has ended')"
+								:text="__('Lớp học đã kết thúc')"
 								placement="right"
 							>
 								<div class="flex items-center gap-x-2 text-ink-amber-3 w-fit">
 									<Info class="w-4 h-4 stroke-1.5" />
-									<span>
-										{{ __('Ended') }}
-									</span>
+									<span>{{ __('Đã kết thúc') }}</span>
 								</div>
 							</Tooltip>
 						</div>
@@ -72,24 +126,19 @@
 			</div>
 		</div>
 
+		<!-- My courses (in-progress) -->
 		<div v-if="myCourses.data?.length" class="mt-10">
 			<div class="flex items-center justify-between mb-3">
 				<span class="font-semibold text-lg text-ink-gray-9">
 					{{
 						myCourses.data[0].membership
-							? __('My Courses')
-							: __('Our Popular Courses')
+							? __('Khoá đang học')
+							: __('Khoá học dành cho bạn')
 					}}
 				</span>
-				<router-link
-					:to="{
-						name: 'Courses',
-					}"
-				>
+				<router-link :to="{ name: 'Courses' }">
 					<span class="flex items-center gap-x-1 text-ink-gray-5 text-xs">
-						<span>
-							{{ __('See all') }}
-						</span>
+						<span>{{ __('Xem tất cả') }}</span>
 						<MoveRight class="size-3 stroke-1.5 rtl:rotate-180" />
 					</span>
 				</router-link>
@@ -104,24 +153,19 @@
 			</div>
 		</div>
 
+		<!-- My batches -->
 		<div v-if="myBatches.data?.length" class="mt-10">
 			<div class="flex items-center justify-between mb-3">
 				<span class="font-semibold text-lg text-ink-gray-9">
 					{{
 						myBatches.data?.[0].students?.includes(user.data?.name)
-							? __('My Batches')
-							: __('Our Upcoming Batches')
+							? __('Lớp của tôi')
+							: __('Lớp sắp khai giảng')
 					}}
 				</span>
-				<router-link
-					:to="{
-						name: 'Batches',
-					}"
-				>
+				<router-link :to="{ name: 'Batches' }">
 					<span class="flex items-center gap-x-1 text-ink-gray-5 text-xs">
-						<span>
-							{{ __('See all') }}
-						</span>
+						<span>{{ __('Xem tất cả') }}</span>
 						<MoveRight class="size-3 stroke-1.5 rtl:rotate-180" />
 					</span>
 				</router-link>
@@ -137,14 +181,16 @@
 		</div>
 	</div>
 </template>
+
 <script setup lang="ts">
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import { createResource, Tooltip } from 'frappe-ui'
 import { formatTime } from '@/utils'
 import {
 	Calendar,
 	Clock,
 	Info,
+	Megaphone,
 	Monitor,
 	MoveRight,
 	Video,
@@ -159,6 +205,9 @@ const user = inject<any>('$user')
 const props = defineProps<{
 	myLiveClasses: any
 }>()
+
+// Placeholder announcements — replace with a proper backend-driven list later.
+const announcements = ref<string[]>([])
 
 const myCourses = createResource({
 	url: 'lms.lms.api.get_my_courses',
