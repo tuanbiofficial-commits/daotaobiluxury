@@ -39,9 +39,10 @@ printf "frappe\npayments\nlms\n" > sites/apps.txt
 echo "==> Creating site lms.localhost..."
 bench new-site lms.localhost \
     --force \
+    --mariadb-root-username root \
     --mariadb-root-password 123 \
     --admin-password admin \
-    --no-mariadb-socket
+    --mariadb-user-host-login-scope='%'
 
 bench --site lms.localhost install-app payments
 bench --site lms.localhost install-app lms
