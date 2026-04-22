@@ -31,9 +31,10 @@ echo "==> Linking LMS app from mounted fork..."
 rm -rf apps/lms
 ln -sfn /workspace apps/lms
 ./env/bin/pip install -e apps/lms
-if ! grep -qx "lms" sites/apps.txt 2>/dev/null; then
-    echo "lms" >> sites/apps.txt
-fi
+
+# Rewrite apps.txt cleanly — bench's appends don't always leave a trailing newline,
+# which can merge app names into invalid module names like "paymentslms".
+printf "frappe\npayments\nlms\n" > sites/apps.txt
 
 echo "==> Creating site lms.localhost..."
 bench new-site lms.localhost \
