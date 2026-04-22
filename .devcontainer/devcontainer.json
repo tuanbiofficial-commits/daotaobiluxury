@@ -1,0 +1,35 @@
+{
+  "name": "Frappe LMS (BILUXURY)",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "frappe",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [8000, 9000],
+  "portsAttributes": {
+    "8000": {
+      "label": "LMS Website",
+      "onAutoForward": "openBrowser",
+      "protocol": "http"
+    },
+    "9000": {
+      "label": "Socket.IO",
+      "onAutoForward": "silent"
+    }
+  },
+  "remoteUser": "frappe",
+  "overrideCommand": false,
+  "shutdownAction": "stopCompose",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "Vue.volar",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
