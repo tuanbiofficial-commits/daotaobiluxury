@@ -285,6 +285,108 @@ TRANSLATIONS = {
     "Join": "Tham gia",
     "Jobs": "Cơ hội nghề nghiệp",
     "Programming Exercises": "Bài thực hành lập trình",
+
+    # Course settings / dashboard page
+    "Overview": "Tổng quan",
+    "Dashboard": "Bảng điều khiển",
+    "Details": "Chi tiết",
+    "Tags": "Thẻ",
+    "Color": "Màu",
+    "Select a fallback color for the course card when no image is set.": "Chọn màu hiển thị mặc định khi khoá chưa có ảnh bìa.",
+    "Publishing Settings": "Cài đặt xuất bản",
+    "Make the course visible to all users.": "Cho phép mọi người dùng xem khoá học.",
+    "Upcoming": "Sắp ra mắt",
+    "Mark the course as upcoming but not yet open for enrollment.": "Đánh dấu khoá sắp ra mắt nhưng chưa mở ghi danh.",
+    "Published On": "Ngày xuất bản",
+    "Featured": "Nổi bật",
+    "Highlight the course on the homepage.": "Hiển thị khoá này nổi bật trên trang chủ.",
+    "Allow Self Enrollment": "Cho phép tự ghi danh",
+    "Allow users to enroll in this course on their own.": "Cho phép học viên tự ghi danh vào khoá mà không cần mời.",
+    "About the Course": "Giới thiệu khoá học",
+    "Preview Video": "Video giới thiệu",
+    "Chapters": "Chương học",
+    "Lessons": "Bài học",
+    "Add a keyword and press enter": "Nhập từ khoá và bấm Enter",
+    "Add a Chapter": "Thêm chương",
+    "Add a Lesson": "Thêm bài học",
+    "Welcome to Frappe Learning": "Chào mừng đến với BILUXURY Academy",
+
+    # Onboarding widget
+    "Getting started": "Bắt đầu",
+    "Reset all": "Đặt lại tất cả",
+    "Skip all": "Bỏ qua tất cả",
+    "Help centre": "Trung tâm hỗ trợ",
+    "Help Center": "Trung tâm hỗ trợ",
+    "Help center": "Trung tâm hỗ trợ",
+    "steps completed": "bước hoàn thành",
+    "step completed": "bước hoàn thành",
+
+    # Generic UI copy
+    "Information": "Thông tin",
+    "Are you sure you want to delete this?": "Bạn có chắc muốn xoá không?",
+    "No items": "Không có mục nào",
+    "No records found": "Không tìm thấy dữ liệu",
+    "Select": "Chọn",
+    "Select File": "Chọn tệp",
+    "Choose file": "Chọn tệp",
+    "Drop files here to upload": "Kéo thả tệp vào đây để tải lên",
+    "Uploading...": "Đang tải lên...",
+    "File uploaded": "Tải lên thành công",
+    "All rights reserved.": "Mọi quyền được bảo lưu.",
+
+    # Permission / auth
+    "Access Denied": "Truy cập bị từ chối",
+    "You don't have permission": "Bạn không có quyền",
+    "Not Permitted": "Không được phép",
+    "Login Required": "Yêu cầu đăng nhập",
+
+    # Common statuses
+    "Open": "Mở",
+    "Closed": "Đóng",
+    "Scheduled": "Đã lên lịch",
+    "Cancelled": "Đã huỷ",
+    "Expired": "Đã hết hạn",
+
+    # Batch-specific
+    "Batch Title": "Tên lớp",
+    "Seat Count": "Số chỗ",
+    "Start Time": "Giờ bắt đầu",
+    "End Time": "Giờ kết thúc",
+    "Medium": "Hình thức",
+    "Online": "Trực tuyến",
+    "Offline": "Trực tiếp",
+    "Hybrid": "Kết hợp",
+    "Live Class": "Lớp học trực tiếp",
+    "Live Classes": "Lớp học trực tiếp",
+
+    # Lesson editor
+    "Add a quiz to your lesson": "Thêm bài trắc nghiệm vào bài học",
+    "Add a programming exercise to your lesson": "Thêm bài thực hành lập trình vào bài học",
+    "Body": "Nội dung",
+    "Content": "Nội dung",
+    "Chapter Title": "Tên chương",
+    "Lesson Title": "Tên bài học",
+    "Include in Preview": "Cho phép xem thử",
+    "Paid Lesson": "Bài học trả phí",
+
+    # Quiz form
+    "Quiz Title": "Tên bài trắc nghiệm",
+    "Max Attempts": "Số lần làm tối đa",
+    "Make the Quiz a Practice": "Đặt làm bài luyện tập",
+    "Shuffle Questions": "Trộn câu hỏi",
+
+    # Payment / pricing (even if unused by BILUXURY)
+    "Free": "Miễn phí",
+    "Paid": "Trả phí",
+    "Amount Paid": "Số tiền đã thanh toán",
+
+    # Date/time extra
+    "Jan": "Th1", "Feb": "Th2", "Mar": "Th3", "Apr": "Th4",
+    "May": "Th5", "Jun": "Th6", "Jul": "Th7", "Aug": "Th8",
+    "Sep": "Th9", "Oct": "Th10", "Nov": "Th11", "Dec": "Th12",
+    "Monday": "Thứ Hai", "Tuesday": "Thứ Ba", "Wednesday": "Thứ Tư",
+    "Thursday": "Thứ Năm", "Friday": "Thứ Sáu", "Saturday": "Thứ Bảy",
+    "Sunday": "Chủ Nhật",
 }
 
 
